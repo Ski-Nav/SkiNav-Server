@@ -1,6 +1,8 @@
 package main
 
-import "github.com/troychiu/SkiNav-Server/pkg/server"
+import (
+	"github.com/Ski-Nav/SkiNav-Server/pkg/server"
+)
 
 func main() {
 	server.Init()

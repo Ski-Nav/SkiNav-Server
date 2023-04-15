@@ -1,8 +1,11 @@
-module github.com/troychiu/SkiNav-Server
+module github.com/Ski-Nav/SkiNav-Server
 
 go 1.19
 
-require github.com/gin-gonic/gin v1.9.0
+require (
+	github.com/gin-gonic/gin v1.9.0
+	github.com/neo4j/neo4j-go-driver/v5 v5.7.0
+)
 
 require (
 	github.com/bytedance/sonic v1.8.0 // indirect
