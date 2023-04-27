@@ -47,9 +47,9 @@ func (db *DB) GetGraphByResort(resortName string) *common.Graph {
 		// transient errors.
 		readAllLoc := `
 			MATCH (n) 
-			WHERE n.Resort = $resortName
-			RETURN ID(n), n.name
-			ORDER BY ID(n)
+			WHERE n.resort = $resortName
+			RETURN n.id, n.name, n.latitude, n.longitude
+			ORDER BY n.id
 		`
 		result, err := tx.Run(ctx, readAllLoc, map[string]any{
 			"resortName": resortName,
@@ -62,7 +62,7 @@ func (db *DB) GetGraphByResort(resortName string) *common.Graph {
 		// while a record could be retrieved, in case of error result.Err()
 		// will return the error.
 		for result.Next(ctx) {
-			vertex := common.NewVertex(result.Record().Values[0].(int64), result.Record().Values[1].(string))
+			vertex := common.NewVertex(result.Record().Values[0].(int64), result.Record().Values[1].(string), result.Record().Values[2].(string), result.Record().Values[3].(string))
 			graph.AddNewVertex(vertex)
 		}
 		// Again, return any error back to driver to indicate rollback and
@@ -78,8 +78,8 @@ func (db *DB) GetGraphByResort(resortName string) *common.Graph {
 		// transient errors.
 		readAllLoc := `
 			Match (n1)-[r]->(n2) 
-			WHERE r.Resort = $resortName
-			RETURN ID(n1), type(r), ID(n2)
+			WHERE r.resort = $resortName
+			RETURN n1.id, n2.id, r.name, type(r), r.difficulty, r.weight
 		`
 		result, err := tx.Run(ctx, readAllLoc, map[string]any{
 			"resortName": resortName,
@@ -92,9 +92,13 @@ func (db *DB) GetGraphByResort(resortName string) *common.Graph {
 		// while a record could be retrieved, in case of error result.Err()
 		// will return the error.
 		for result.Next(ctx) {
-			fromID, toID := result.Record().Values[0].(int64), result.Record().Values[2].(int64)
+			fromID, toID := result.Record().Values[0].(int64), result.Record().Values[1].(int64)
 			fromV, toV := graph.GetVertex(fromID), graph.GetVertex(toID)
-			edge := common.NewEdge(result.Record().Values[1].(string), toV)
+			edgeName := result.Record().Values[2].(string)
+			edgeType := result.Record().Values[3].(string)
+			edgeDiffculty := result.Record().Values[4].(int64)
+			edgeWeight := result.Record().Values[5].(int64)
+			edge := common.NewEdge(edgeName, edgeType, toV, edgeDiffculty, edgeWeight)
 			fromV.AddNewEdge(*edge)
 		}
 		// Again, return any error back to driver to indicate rollback and

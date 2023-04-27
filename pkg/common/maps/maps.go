@@ -1,8 +1,47 @@
 package maps
 
-func Init() map[string]struct{} {
-	maps := map[string]struct{}{
-		"Big Bear": {},
+import (
+	"errors"
+
+	"github.com/Ski-Nav/SkiNav-Server/pkg/common"
+	"github.com/Ski-Nav/SkiNav-Server/pkg/lib/db"
+)
+
+type I interface {
+	GetGraphByResortName(name string) (*common.Graph, error)
+	GetAllResorts() []string
+}
+
+type ResortMap struct {
+	Map        map[string]*common.Graph
+	AllResorts []string
+}
+
+func Init(db *db.DB) I {
+	resortMap := make(map[string]*common.Graph)
+	allResorts := AllResorts()
+	for _, resort := range allResorts {
+		resortMap[resort] = db.GetGraphByResort(resort)
 	}
-	return maps
+	return &ResortMap{
+		Map:        resortMap,
+		AllResorts: allResorts,
+	}
+}
+
+func (m *ResortMap) GetAllResorts() []string {
+	return m.AllResorts
+}
+
+func (m *ResortMap) GetGraphByResortName(name string) (*common.Graph, error) {
+	graph, ok := m.Map[name]
+	if !ok {
+		return nil, errors.New("resort not found")
+	}
+	return graph, nil
+}
+
+func AllResorts() []string {
+	allresort := []string{"Big Bear", "Mammoth", "UCSD"}
+	return allresort
 }

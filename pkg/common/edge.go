@@ -3,13 +3,23 @@ package common
 import "fmt"
 
 type Edge struct {
-	EdgeType string  `json:"edgeType"`
-	To       *Vertex `json:"-"`
-	ToID     int64   `json:"to"`
+	Name       string  `json:"name"`
+	EdgeType   string  `json:"edgeType"`
+	To         *Vertex `json:"-"`
+	ToID       int64   `json:"to"`
+	Difficulty int64   `json:"difficulty"`
+	Weight     int64   `json:"weight"`
 }
 
-func NewEdge(edgeType string, to *Vertex) *Edge {
-	return &Edge{EdgeType: edgeType, To: to, ToID: to.ID}
+func NewEdge(name string, edgeType string, to *Vertex, difficulty int64, weight int64) *Edge {
+	return &Edge{
+		Name:       name,
+		EdgeType:   edgeType,
+		To:         to,
+		ToID:       to.ID,
+		Difficulty: difficulty,
+		Weight:     weight,
+	}
 }
 
 func (e *Edge) Print() {

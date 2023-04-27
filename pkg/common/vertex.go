@@ -3,13 +3,21 @@ package common
 import "fmt"
 
 type Vertex struct {
-	ID    int64  `json:"id"`
-	Name  string `json:"name"`
-	Edges []Edge `json:"edges"`
+	ID        int64  `json:"id"`
+	Name      string `json:"name"`
+	Latitude  string `json:"latitude"`
+	Longitude string `json:"longitude"`
+	Edges     []Edge `json:"edges"`
 }
 
-func NewVertex(id int64, name string) *Vertex {
-	return &Vertex{ID: id, Name: name, Edges: []Edge{}}
+func NewVertex(id int64, name string, latitude string, longitude string) *Vertex {
+	return &Vertex{
+		ID:        id,
+		Name:      name,
+		Edges:     []Edge{},
+		Latitude:  latitude,
+		Longitude: longitude,
+	}
 }
 
 func (v *Vertex) AddNewEdge(edge Edge) {
