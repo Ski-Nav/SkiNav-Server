@@ -110,3 +110,30 @@ func (db *DB) GetGraphByResort(resortName string) *common.Graph {
 	}
 	return graph
 }
+
+func (db *DB) GetAllResort() *[]string {
+	driver := *db.driver
+	ctx := db.ctx
+	session := driver.NewSession(ctx, neo4j.SessionConfig{DatabaseName: "neo4j"})
+	defer session.Close(ctx)
+	allResort := make([]string, 0)
+	_, err := session.ExecuteRead(ctx, func(tx neo4j.ManagedTransaction) (any, error) {
+		readAllLoc := `
+			match (n) 
+			return distinct(n.resort)
+		`
+		result, err := tx.Run(ctx, readAllLoc, map[string]any{})
+		if err != nil {
+			return nil, err
+		}
+		for result.Next(ctx) {
+			resort := result.Record().Values[0].(string)
+			allResort = append(allResort, resort)
+		}
+		return nil, result.Err()
+	})
+	if err != nil {
+		panic(err)
+	}
+	return &allResort
+}

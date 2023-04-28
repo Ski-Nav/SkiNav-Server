@@ -9,18 +9,18 @@ import (
 
 type I interface {
 	GetGraphByResortName(name string) (*common.Graph, error)
-	GetAllResorts() []string
+	GetAllResorts() *[]string
 }
 
 type ResortMap struct {
 	Map        map[string]*common.Graph
-	AllResorts []string
+	AllResorts *[]string
 }
 
 func Init(db *db.DB) I {
 	resortMap := make(map[string]*common.Graph)
-	allResorts := AllResorts()
-	for _, resort := range allResorts {
+	allResorts := db.GetAllResort()
+	for _, resort := range *allResorts {
 		resortMap[resort] = db.GetGraphByResort(resort)
 	}
 	return &ResortMap{
@@ -29,7 +29,7 @@ func Init(db *db.DB) I {
 	}
 }
 
-func (m *ResortMap) GetAllResorts() []string {
+func (m *ResortMap) GetAllResorts() *[]string {
 	return m.AllResorts
 }
 
@@ -39,9 +39,4 @@ func (m *ResortMap) GetGraphByResortName(name string) (*common.Graph, error) {
 		return nil, errors.New("resort not found")
 	}
 	return graph, nil
-}
-
-func AllResorts() []string {
-	allresort := []string{"Big Bear", "Mammoth", "UCSD"}
-	return allresort
 }
