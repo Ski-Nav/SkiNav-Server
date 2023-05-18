@@ -7,11 +7,11 @@ type Edge struct {
 	EdgeType   string  `json:"edgeType"`
 	To         *Vertex `json:"-"`
 	ToID       int64   `json:"to"`
-	Difficulty int64   `json:"difficulty"`
-	Weight     int64   `json:"weight"`
+	Difficulty string  `json:"difficulty"`
+	Weight     float64 `json:"weight"`
 }
 
-func NewEdge(name string, edgeType string, to *Vertex, difficulty int64, weight int64) *Edge {
+func NewEdge(name string, edgeType string, to *Vertex, difficulty string, weight float64) *Edge {
 	return &Edge{
 		Name:       name,
 		EdgeType:   edgeType,

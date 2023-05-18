@@ -3,14 +3,14 @@ package common
 import "fmt"
 
 type Vertex struct {
-	ID        int64  `json:"id"`
-	Name      string `json:"name"`
-	Latitude  string `json:"latitude"`
-	Longitude string `json:"longitude"`
-	Edges     []Edge `json:"edges"`
+	ID        int64   `json:"id"`
+	Name      string  `json:"name"`
+	Latitude  float64 `json:"latitude"`
+	Longitude float64 `json:"longitude"`
+	Edges     []Edge  `json:"edges"`
 }
 
-func NewVertex(id int64, name string, latitude string, longitude string) *Vertex {
+func NewVertex(id int64, name string, latitude float64, longitude float64) *Vertex {
 	return &Vertex{
 		ID:        id,
 		Name:      name,

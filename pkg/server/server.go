@@ -25,7 +25,7 @@ func Init() {
 			resortName := c.Param("ResortName")
 			graph, err := resortMap.GetGraphByResortName(resortName)
 			if err != nil {
-				c.AbortWithError(400, errors.New("resort not found"))
+				c.AbortWithError(http.StatusBadRequest, errors.New("resort not found"))
 				return
 			}
 			c.JSON(http.StatusOK, graph)
