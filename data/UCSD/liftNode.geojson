@@ -1,0 +1,44 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+              "id": "Communications"
+            },
+            "geometry": {
+              "coordinates": [
+                -117.2402603,
+                32.8814977
+              ],
+              "type": "Point"
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+              "id": "Geisel"
+            },
+            "geometry": {
+              "coordinates": [
+                -117.2375721,
+                32.8811450
+              ],
+              "type": "Point"
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+              "id": "Eucalyptus"
+            },
+            "geometry": {
+              "coordinates": [
+                -117.2395673,
+                32.8814433
+              ],
+              "type": "Point"
+            }
+          }
+    ]
+  }

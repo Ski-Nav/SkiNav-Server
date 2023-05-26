@@ -1,0 +1,28 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+              "id": "Communications->Eucalyptus->Geisel"
+            },
+            "geometry": {
+              "coordinates": [
+                [
+                    -117.2402603,
+                    32.8814977
+                ],
+                [
+                    -117.2395673,
+                    32.8814433
+                ],
+                [
+                    -117.2375721,
+                    32.8811450
+                ]
+              ],
+              "type": "LineString"
+            }
+        }
+    ]
+  }

@@ -1,0 +1,57 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "Geisel"
+      },
+      "geometry": {
+        "coordinates": [
+          -117.2375721,
+          32.8811450
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "Cognitive Science"
+      },
+      "geometry": {
+        "coordinates": [
+          -117.2393515,
+          32.8804991
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "Communications"
+      },
+      "geometry": {
+        "coordinates": [
+          -117.2402603,
+          32.8814977
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "Econ"
+      },
+      "geometry": {
+        "coordinates": [
+          -117.2404279,
+          32.8823528
+        ],
+        "type": "Point"
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+              "id": "Geisel->Cognitive->Communications",
+              "piste:difficulty": "novice"
+            },
+            "geometry": {
+              "coordinates": [
+                [
+                  -117.2375721,
+                  32.8811450
+                ],
+                [
+                  -117.2393515,
+                   32.8804991
+                ],
+                [
+                  -117.2402603,
+                  32.8814977
+                ]
+              ],
+              "type": "LineString"
+            }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "id": "Geisel->Econ->Communications",
+            "piste:difficulty":"advanced"
+          },
+          "geometry": {
+            "coordinates": [
+              [
+                -117.2375721,
+                32.8811450
+              ],
+              [
+                -117.2404279,
+                32.8823528
+              ],
+              [
+                -117.2402603,
+                32.8814977
+              ]
+            ],
+            "type": "LineString"
+          }
+      }
+    ]
+  }

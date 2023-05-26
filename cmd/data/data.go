@@ -42,10 +42,12 @@ func main() {
 				log.Printf("%d done", i)
 			}
 			loc := location{long: f.Geometry.Point[0], lat: f.Geometry.Point[1]}
-			locToId[loc] = f.Properties["id"].(string)
-			err := db.InsertNode(f, resort)
-			if err != nil {
-				log.Fatal(err)
+			if _, ok := locToId[loc]; !ok {
+				locToId[loc] = f.Properties["id"].(string)
+				err := db.InsertNode(f, resort)
+				if err != nil {
+					log.Fatal(err)
+				}
 			}
 		}
 
@@ -80,7 +82,19 @@ func main() {
 					log.Fatal(err)
 				}
 			}
-
+			toploc := location{long: f.Geometry.LineString[0][0], lat: f.Geometry.LineString[0][1]}
+			topId := locToId[toploc]
+			err := db.AddNodeAlias(topId, fmt.Sprintf("top/%s", f.Properties["name"]))
+			if err != nil {
+				log.Fatal(err)
+			}
+			lastIdx := len(f.Geometry.LineString) - 1
+			bottomloc := location{long: f.Geometry.LineString[lastIdx][0], lat: f.Geometry.LineString[lastIdx][1]}
+			bottomId := locToId[bottomloc]
+			err = db.AddNodeAlias(bottomId, fmt.Sprintf("bottom/%s", f.Properties["name"]))
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 
 		filePath = path.Join("./data", resort, "liftNode.geojson")
@@ -91,10 +105,12 @@ func main() {
 				log.Printf("%d done", i)
 			}
 			loc := location{long: f.Geometry.Point[0], lat: f.Geometry.Point[1]}
-			locToId[loc] = f.Properties["id"].(string)
-			err := db.InsertNode(f, resort)
-			if err != nil {
-				log.Fatal(err)
+			if _, ok := locToId[loc]; !ok {
+				locToId[loc] = f.Properties["id"].(string)
+				err := db.InsertNode(f, resort)
+				if err != nil {
+					log.Fatal(err)
+				}
 			}
 		}
 
@@ -127,7 +143,19 @@ func main() {
 					log.Fatal(err)
 				}
 			}
-
+			toploc := location{long: f.Geometry.LineString[0][0], lat: f.Geometry.LineString[0][1]}
+			topId := locToId[toploc]
+			err := db.AddNodeAlias(topId, fmt.Sprintf("top/%s", f.Properties["name"]))
+			if err != nil {
+				log.Fatal(err)
+			}
+			lastIdx := len(f.Geometry.LineString) - 1
+			bottomloc := location{long: f.Geometry.LineString[lastIdx][0], lat: f.Geometry.LineString[lastIdx][1]}
+			bottomId := locToId[bottomloc]
+			err = db.AddNodeAlias(bottomId, fmt.Sprintf("bottom/%s", f.Properties["name"]))
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 	}
 }

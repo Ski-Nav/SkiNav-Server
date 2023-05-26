@@ -51,7 +51,7 @@ func (db *DB) GetGraphByResort(resortName string) *common.Graph {
 		readAllLoc := `
 			MATCH (n) 
 			WHERE n.resort = $resortName
-			RETURN n.id, n.latitude, n.longitude
+			RETURN n.id, n.latitude, n.longitude, n.aliases
 			ORDER BY n.id
 		`
 		result, err := tx.Run(ctx, readAllLoc, map[string]any{
@@ -68,7 +68,7 @@ func (db *DB) GetGraphByResort(resortName string) *common.Graph {
 			id := result.Record().Values[0].(string)
 			idToIdx[id] = idx
 			idx++
-			vertex := common.NewVertex(idToIdx[id], id, result.Record().Values[1].(float64), result.Record().Values[2].(float64))
+			vertex := common.NewVertex(idToIdx[id], id, result.Record().Values[1].(float64), result.Record().Values[2].(float64), result.Record().Values[3].([]interface{}))
 			graph.AddNewVertex(vertex)
 		}
 		// Again, return any error back to driver to indicate rollback and
@@ -186,7 +186,8 @@ func (db *DB) InsertNode(node *geojson.Feature, resort string) error {
 	defer session.Close(ctx)
 	_, err := session.ExecuteWrite(ctx, func(transaction neo4j.ManagedTransaction) (any, error) {
 		result, err := transaction.Run(ctx,
-			"CREATE (n:Node {id: $id, longitude: $longitude, latitude: $latitude, resort: $resort}) RETURN n.name + ', from node ' + id(n)",
+			`CREATE (n:Node {id: $id, longitude: $longitude, latitude: $latitude, resort: $resort, aliases: []}) 
+			RETURN n.name + ', from node ' + id(n)`,
 			map[string]any{
 				"id":        node.Properties["id"],
 				"longitude": node.Geometry.Point[0],
@@ -329,6 +330,37 @@ func (db *DB) DeleteNodesAndWays(resort string) error {
 
 		return nil, result.Err()
 	})
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (db *DB) AddNodeAlias(id string, alias string) error {
+	driver := *db.driver
+	ctx := db.ctx
+	session := driver.NewSession(ctx, neo4j.SessionConfig{DatabaseName: "neo4j"})
+	defer session.Close(ctx)
+	_, err := session.ExecuteWrite(ctx, func(transaction neo4j.ManagedTransaction) (any, error) {
+		result, err := transaction.Run(ctx,
+			`MATCH (n:Node)
+		  	WHERE n.id = $id
+			SET n.aliases = n.aliases + $alias`,
+			map[string]any{
+				"id":    id,
+				"alias": alias,
+			})
+		if err != nil {
+			return nil, err
+		}
+
+		if result.Next(ctx) {
+			return result.Record().Values[0], nil
+		}
+
+		return nil, result.Err()
+	})
+
 	if err != nil {
 		return err
 	}
