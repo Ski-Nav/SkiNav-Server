@@ -85,7 +85,7 @@ func (db *DB) GetGraphByResort(resortName string) *common.Graph {
 		readAllLoc := `
 			Match (n1)-[r:SLOPE]->(n2) 
 			WHERE r.resort = $resortName
-			RETURN n1.id, n2.id, r.name, type(r), r.difficulty, r.distance
+			RETURN n1.id, n2.id, r.name, type(r), r.difficulty, r.distance, r.id
 		`
 		result, err := tx.Run(ctx, readAllLoc, map[string]any{
 			"resortName": resortName,
@@ -104,7 +104,8 @@ func (db *DB) GetGraphByResort(resortName string) *common.Graph {
 			edgeType := result.Record().Values[3].(string)
 			edgeDiffculty := result.Record().Values[4].(string)
 			edgeWeight := result.Record().Values[5].(float64)
-			edge := common.NewEdge(edgeName, edgeType, toV, edgeDiffculty, edgeWeight)
+			edgeID := result.Record().Values[6].(string)
+			edge := common.NewEdge(edgeName, edgeID, edgeType, toV, edgeDiffculty, edgeWeight)
 			fromV.AddNewEdge(*edge)
 		}
 		// Again, return any error back to driver to indicate rollback and
@@ -121,7 +122,7 @@ func (db *DB) GetGraphByResort(resortName string) *common.Graph {
 		readAllLoc := `
 			Match (n1)-[r:LIFT]->(n2) 
 			WHERE r.resort = $resortName
-			RETURN n1.id, n2.id, r.name, type(r), r.distance
+			RETURN n1.id, n2.id, r.name, type(r), r.distance, r.id
 		`
 		result, err := tx.Run(ctx, readAllLoc, map[string]any{
 			"resortName": resortName,
@@ -139,7 +140,8 @@ func (db *DB) GetGraphByResort(resortName string) *common.Graph {
 			edgeName := result.Record().Values[2].(string)
 			edgeType := result.Record().Values[3].(string)
 			edgeWeight := result.Record().Values[4].(float64)
-			edge := common.NewEdge(edgeName, edgeType, toV, "", edgeWeight)
+			edgeID := result.Record().Values[5].(string)
+			edge := common.NewEdge(edgeName, edgeID, edgeType, toV, "", edgeWeight)
 			fromV.AddNewEdge(*edge)
 		}
 		// Again, return any error back to driver to indicate rollback and
@@ -222,10 +224,11 @@ func (db *DB) InsertPiste(node *geojson.Feature, resort string, fromId string, t
 			(a:Node),
 			(b:Node)
 		  	WHERE a.id = $fromId AND b.id = $toId
-		  	CREATE (a)-[r:SLOPE {resort: $resort, name: $name, difficulty: $difficulty, distance: $distance}]->(b)
+		  	CREATE (a)-[r:SLOPE {resort: $resort, name: $name, difficulty: $difficulty, distance: $distance, id: $id}]->(b)
 		  	RETURN type(r)`,
 			map[string]any{
 				"name":       node.Properties["name"],
+				"id":         node.Properties["id"],
 				"fromId":     fromId,
 				"toId":       toId,
 				"resort":     resort,
@@ -260,10 +263,11 @@ func (db *DB) InsertLift(node *geojson.Feature, resort string, fromId string, to
 			(a:Node),
 			(b:Node)
 		  	WHERE a.id = $fromId AND b.id = $toId
-		  	CREATE (a)-[r:LIFT {resort: $resort, name: $name, distance: $distance}]->(b)
+		  	CREATE (a)-[r:LIFT {resort: $resort, name: $name, distance: $distance, id: $id}]->(b)
 		  	RETURN type(r)`,
 			map[string]any{
 				"name":     node.Properties["name"],
+				"id":       node.Properties["id"],
 				"fromId":   fromId,
 				"toId":     toId,
 				"resort":   resort,

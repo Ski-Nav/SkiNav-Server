@@ -4,7 +4,8 @@
         {
             "type": "Feature",
             "properties": {
-              "id": "Communications->Eucalyptus->Geisel"
+              "name": "Communications->Eucalyptus->Geisel",
+              "id": "way/1"
             },
             "geometry": {
               "coordinates": [

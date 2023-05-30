@@ -4,7 +4,8 @@
         {
             "type": "Feature",
             "properties": {
-              "id": "Geisel->Cognitive->Communications",
+              "name": "Geisel->Cognitive->Communications",
+              "id": "way/2",
               "piste:difficulty": "novice"
             },
             "geometry": {
@@ -28,7 +29,8 @@
         {
           "type": "Feature",
           "properties": {
-            "id": "Geisel->Econ->Communications",
+            "name": "Geisel->Econ->Communications",
+            "id": "way/3",
             "piste:difficulty":"advanced"
           },
           "geometry": {
