@@ -5,7 +5,7 @@
             "type": "Feature",
             "properties": {
               "name": "Communications->Eucalyptus->Geisel",
-              "id": "way/1"
+              "id": "way/11"
             },
             "geometry": {
               "coordinates": [
@@ -24,6 +24,46 @@
               ],
               "type": "LineString"
             }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "WLH->Target",
+            "id": "way/12"
+          },
+          "geometry": {
+            "coordinates": [
+              [
+                -117.2343591,
+                32.8805640
+              ],
+              [
+                -117.2370613,
+                32.8793851
+              ]
+            ],
+            "type": "LineString"
+          }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Geisel->Target",
+          "id": "way/13"
+        },
+        "geometry": {
+          "coordinates": [
+            [
+              -117.2375721,
+              32.8811450
+            ],
+            [
+              -117.2370613,
+              32.8793851
+            ]
+          ],
+          "type": "LineString"
         }
+    }
     ]
   }

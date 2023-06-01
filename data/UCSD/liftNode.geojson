@@ -39,6 +39,32 @@
               ],
               "type": "Point"
             }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": "Target"
+            },
+            "geometry": {
+              "coordinates": [
+                -117.2370613,
+                32.8793851
+              ],
+              "type": "Point"
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": "WLH"
+            },
+            "geometry": {
+              "coordinates": [
+                -117.2343591,
+                32.8805640
+              ],
+              "type": "Point"
+            }
           }
     ]
   }

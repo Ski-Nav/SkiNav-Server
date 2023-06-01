@@ -5,7 +5,7 @@
             "type": "Feature",
             "properties": {
               "name": "Geisel->Cognitive->Communications",
-              "id": "way/2",
+              "id": "way/21",
               "piste:difficulty": "novice"
             },
             "geometry": {
@@ -30,7 +30,7 @@
           "type": "Feature",
           "properties": {
             "name": "Geisel->Econ->Communications",
-            "id": "way/3",
+            "id": "way/22",
             "piste:difficulty":"advanced"
           },
           "geometry": {
@@ -50,6 +50,106 @@
             ],
             "type": "LineString"
           }
-      }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "Geisel->Library Walk->Cognitive",
+            "id": "way/23",
+            "piste:difficulty":"advanced"
+          },
+          "geometry": {
+            "coordinates": [
+              [
+                -117.2375721,
+                32.8811450
+              ],
+              [
+                -117.2375682,
+                32.8802489
+              ],
+              [
+                -117.2393515,
+                32.8804991
+              ]
+            ],
+            "type": "LineString"
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "Cognitive->Peterson->Social Science->Communications",
+            "id": "way/24",
+            "piste:difficulty":"advanced"
+          },
+          "geometry": {
+            "coordinates": [
+              [
+                -117.2393515,
+                32.8804991
+              ],
+              [
+                -117.2402542,
+                32.8799736
+              ],
+              [
+                -117.2401876,
+                32.8806727
+              ],
+              [
+                -117.2402603,
+                32.8814977
+              ]
+            ],
+            "type": "LineString"
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "Target->Peterson",
+            "id": "way/25",
+            "piste:difficulty":"advanced"
+          },
+          "geometry": {
+            "coordinates": [
+              [
+                -117.2370613,
+                32.8793851
+              ],
+              [
+                -117.2402542,
+                32.8799736
+              ]
+            ],
+            "type": "LineString"
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "Target->PC Loop->WLH",
+            "id": "way/26",
+            "piste:difficulty":"advanced"
+          },
+          "geometry": {
+            "coordinates": [
+              [
+                -117.2370613,
+                32.8793851
+              ],
+              [
+                -117.2357788,
+                32.8802201
+              ],
+              [
+                -117.2343591,
+                32.880564
+              ]
+            ],
+            "type": "LineString"
+          }
+        }
     ]
   }

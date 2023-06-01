@@ -9,7 +9,7 @@
       "geometry": {
         "coordinates": [
           -117.2375721,
-          32.8811450
+          32.881145
         ],
         "type": "Point"
       }
@@ -49,6 +49,84 @@
         "coordinates": [
           -117.2404279,
           32.8823528
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "Peterson"
+      },
+      "geometry": {
+        "coordinates": [
+          -117.2402542,
+          32.8799736
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "Social Science"
+      },
+      "geometry": {
+        "coordinates": [
+          -117.2401876,
+          32.8806727
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "Library Walk"
+      },
+      "geometry": {
+        "coordinates": [
+          -117.2375682,
+          32.8802489
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "Target"
+      },
+      "geometry": {
+        "coordinates": [
+          -117.2370613,
+          32.8793851
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "WLH"
+      },
+      "geometry": {
+        "coordinates": [
+          -117.2343591,
+          32.880564
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "PC loop"
+      },
+      "geometry": {
+        "coordinates": [
+          -117.2357788,
+          32.8802201
         ],
         "type": "Point"
       }

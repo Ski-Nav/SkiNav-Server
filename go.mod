@@ -7,6 +7,8 @@ require (
 	github.com/neo4j/neo4j-go-driver/v5 v5.7.0
 )
 
+require github.com/bradfitz/gomemcache v0.0.0-20230124162541-5f7a7d875746 // indirect
+
 require (
 	github.com/bytedance/sonic v1.8.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
