@@ -17,8 +17,8 @@ func (g *Graph) GetVertex(id int64) *Vertex {
 	return g.Verticies[id]
 }
 
-func (g *Graph) Print() {
-	for _, vertex := range g.Verticies {
-		vertex.Print()
-	}
-}
+// func (g *Graph) Print() {
+// 	for _, vertex := range g.Verticies {
+// 		vertex.Print()
+// 	}
+// }

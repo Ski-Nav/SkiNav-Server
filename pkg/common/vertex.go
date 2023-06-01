@@ -1,7 +1,5 @@
 package common
 
-import "fmt"
-
 type Vertex struct {
 	ID        int64         `json:"id"`
 	Name      string        `json:"name"`
@@ -26,9 +24,9 @@ func (v *Vertex) AddNewEdge(edge Edge) {
 	v.Edges = append(v.Edges, edge)
 }
 
-func (v *Vertex) Print() {
-	fmt.Printf("ID: %d Name: %s\n", v.ID, v.Name)
-	for _, edge := range v.Edges {
-		edge.Print()
-	}
-}
+// func (v *Vertex) Print() {
+// 	fmt.Printf("ID: %d Name: %s\n", v.ID, v.Name)
+// 	for _, edge := range v.Edges {
+// 		edge.Print()
+// 	}
+// }
