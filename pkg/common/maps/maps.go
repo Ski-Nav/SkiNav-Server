@@ -24,16 +24,10 @@ type ResortMap struct {
 }
 
 func Init(db *db.DB) I {
-	resortMap := make(map[string]*common.Graph)
 	allResorts := db.GetAllResort()
-	for _, resort := range *allResorts {
-		resortMap[resort] = db.GetGraphByResort(resort)
-	}
-
 	// mc := memcache.New("127.0.0.1:11211")
 	mc := memcache.New("memcached.xzdlgx.0001.use2.cache.amazonaws.com:11211")
 	return &ResortMap{
-		Map:        resortMap,
 		AllResorts: allResorts,
 		mc:         mc,
 		db:         db,

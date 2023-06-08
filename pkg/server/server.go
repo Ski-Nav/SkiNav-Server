@@ -10,7 +10,9 @@ import (
 )
 
 func Init() {
+	// initialize database connection
 	db := db.Init()
+	// init map
 	resortMap := maps.Init(db)
 	r := gin.Default()
 	v1 := r.Group("/api/v1")

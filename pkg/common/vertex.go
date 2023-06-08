@@ -23,10 +23,3 @@ func NewVertex(id int64, name string, latitude float64, longitude float64, alias
 func (v *Vertex) AddNewEdge(edge Edge) {
 	v.Edges = append(v.Edges, edge)
 }
-
-// func (v *Vertex) Print() {
-// 	fmt.Printf("ID: %d Name: %s\n", v.ID, v.Name)
-// 	for _, edge := range v.Edges {
-// 		edge.Print()
-// 	}
-// }

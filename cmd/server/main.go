@@ -5,5 +5,6 @@ import (
 )
 
 func main() {
+	// Entrypoint
 	server.Init()
 }

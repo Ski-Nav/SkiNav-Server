@@ -16,5 +16,48 @@ The SkiNav-Server architecture consists of three key components, as shown in the
 1. **Golang Gin Server**: This component handles user requests and generates responses based on the requested data. It serves as the main interface between the client applications and the backend server.
 2. **Neo4j Database**: The Neo4j database stores the map data for ski resorts. It provides efficient storage and retrieval of the map data, allowing the server to quickly access the required information.
 3. **Memcached**: Memcached is utilized as a memory cache to optimize the overall performance of the server. It stores frequently accessed data in memory, reducing the need to fetch it from the database on every request. This caching mechanism improves response times and enhances the user experience.
-4. 
+
 By combining these three components, SkiNav-Server provides a robust and efficient backend solution for serving ski resort map data to client applications.
+
+## Project structure
+``` bash
+├── Dockerfile
+├── README.md
+├── assets
+│   └── architecture.png
+├── cmd
+│   ├── data
+│   │   └── data.go
+│   └── server
+│       └── main.go
+├── data
+│   ├── Mammoth
+│   │   ├── liftNode.geojson
+│   │   ├── liftWay.geojson
+│   │   ├── pisteNode.geojson
+│   │   └── pisteWay.geojson
+│   └── UCSD
+│       ├── liftNode.geojson
+│       ├── liftWay.geojson
+│       ├── pisteNode.geojson
+│       └── pisteWay.geojson
+├── go.mod
+├── go.sum
+└── pkg
+    ├── common
+    │   ├── edge.go
+    │   ├── graph.go
+    │   ├── maps
+    │   │   └── maps.go
+    │   └── vertex.go
+    ├── data
+    │   └── geojson.go
+    ├── lib
+    │   └── db
+    │       └── db.go
+    └── server
+        └── server.go
+```
+1. **cmd**: the entrypoint of the server
+2. **data**: the resorts data
+3. **pkg**: the actual codebase of the project
