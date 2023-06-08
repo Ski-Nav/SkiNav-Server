@@ -213,7 +213,7 @@ func (db *DB) InsertNode(node *geojson.Feature, resort string) error {
 	return nil
 }
 
-func (db *DB) InsertPiste(node *geojson.Feature, resort string, fromId string, toId string, distance float64) error {
+func (db *DB) InsertPiste(node *geojson.Feature, id string, resort string, fromId string, toId string, distance float64) error {
 	driver := *db.driver
 	ctx := db.ctx
 	session := driver.NewSession(ctx, neo4j.SessionConfig{DatabaseName: "neo4j"})
@@ -228,7 +228,7 @@ func (db *DB) InsertPiste(node *geojson.Feature, resort string, fromId string, t
 		  	RETURN type(r)`,
 			map[string]any{
 				"name":       node.Properties["name"],
-				"id":         node.Properties["id"],
+				"id":         id,
 				"fromId":     fromId,
 				"toId":       toId,
 				"resort":     resort,
@@ -252,7 +252,7 @@ func (db *DB) InsertPiste(node *geojson.Feature, resort string, fromId string, t
 	return nil
 }
 
-func (db *DB) InsertLift(node *geojson.Feature, resort string, fromId string, toId string, distance float64) error {
+func (db *DB) InsertLift(node *geojson.Feature, id string, resort string, fromId string, toId string, distance float64) error {
 	driver := *db.driver
 	ctx := db.ctx
 	session := driver.NewSession(ctx, neo4j.SessionConfig{DatabaseName: "neo4j"})
@@ -267,7 +267,7 @@ func (db *DB) InsertLift(node *geojson.Feature, resort string, fromId string, to
 		  	RETURN type(r)`,
 			map[string]any{
 				"name":     node.Properties["name"],
-				"id":       node.Properties["id"],
+				"id":       id,
 				"fromId":   fromId,
 				"toId":     toId,
 				"resort":   resort,

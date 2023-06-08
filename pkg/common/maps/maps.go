@@ -30,8 +30,8 @@ func Init(db *db.DB) I {
 		resortMap[resort] = db.GetGraphByResort(resort)
 	}
 
-	mc := memcache.New("127.0.0.1:11211")
-	// mc := memcache.New("memcached.xzdlgx.0001.use2.cache.amazonaws.com:11211")
+	// mc := memcache.New("127.0.0.1:11211")
+	mc := memcache.New("memcached.xzdlgx.0001.use2.cache.amazonaws.com:11211")
 	return &ResortMap{
 		Map:        resortMap,
 		AllResorts: allResorts,

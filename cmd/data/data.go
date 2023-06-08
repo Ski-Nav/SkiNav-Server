@@ -77,7 +77,8 @@ func main() {
 				if _, ok := f.Properties["piste:difficulty"]; !ok {
 					f.Properties["piste:difficulty"] = "novice"
 				}
-				err := db.InsertPiste(f, resort, fromId, toId, mi)
+				id := fmt.Sprintf("%s/%d", f.Properties["id"], i)
+				err := db.InsertPiste(f, id, resort, fromId, toId, mi)
 				if err != nil {
 					log.Fatal(err)
 				}
@@ -138,7 +139,8 @@ func main() {
 					log.Fatal("node not found")
 				}
 				mi, _ := haversine.Distance(haversine.Coord{Lat: fromLoc.lat, Lon: fromLoc.long}, haversine.Coord{Lat: toLoc.lat, Lon: toLoc.long})
-				err := db.InsertLift(f, resort, fromId, toId, mi)
+				id := fmt.Sprintf("%s/%d", f.Properties["id"], i)
+				err := db.InsertLift(f, id, resort, fromId, toId, mi)
 				if err != nil {
 					log.Fatal(err)
 				}
